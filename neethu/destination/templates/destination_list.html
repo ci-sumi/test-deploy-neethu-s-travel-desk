@@ -1,0 +1,97 @@
+{% extends "index.html" %}
+{% load static %}
+
+{% block content %}
+{% if messages %}
+          <div class="alert-container position-relative">
+            <div class="mt-3 position-absolute w-90" style=" top:0;z-index: 1050;">
+              {% for message in messages %}
+                <div class="alert alert-{{ message.tags }} fade-out mb-3" role="alert";>
+                  {{ message }}
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+              {% endfor %}
+            </div>
+          </div>
+        {% endif %}
+       
+
+<div class="container mt-4">
+    <h3 class="text-center">Popular Destinations</h3>
+    <div class="row mb-4">
+        <div class="col-md-12">
+            <form method="get" action="">
+                <div class="input-group">
+                    <input type="text" class="form-control" name="query" placeholder="Search destinations" value="{{ request.GET.query }}">
+                    <div class="input-group-append">
+                        <button type="submit" class="btn btn-primary ml-2" style="width: 100px;height:40px;">Search</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="row">
+        <!-- Loop through destinations and display them as cards -->
+        {% for destination in page_obj.object_list %}
+        <div class="col-md-4 mb-4">
+            <div class="card shadow-sm h-100">
+                <!-- Destination Image (Optional) -->
+                {% if destination.image %}
+                <img src="{{ destination.image.url }}" class="card-img-top" alt="{{ destination.name }}" style="max-height: 200px; object-fit: cover;">
+                {% else %}
+                <img src="{% static 'images/destinationdefault.jpg' %}" class="card-img-top" alt="Default Image" style="max-height: 200px; object-fit: cover;">
+                {% endif %}
+
+                <div class="card-body">
+                    <!-- Destination Name -->
+                    <h5 class="card-title">{{ destination.name }}</h5>
+
+                    <!-- Destination Country -->
+                    <p class="card-text">
+                        <strong>Country:</strong> {{ destination.country }}
+                    </p>
+
+                    <!-- Best Time to Visit -->
+                    <p class="card-text">
+                        <strong>Best Time to Visit:</strong> {{ destination.get_best_time_to_visit_display }}
+                    </p>
+
+                    <!-- Budget Type -->
+                    <p class="card-text">
+                        <strong>Budget:</strong> {{ destination.get_budget_type_display }}
+                    </p>
+                </div>
+
+                <!-- View Details Button -->
+                <div class="card-footer text-center">
+                    <a href="{% url 'destination_detail' destination.id %}" class="btn btn-outline-primary">View Details</a>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <p>No destinations available at the moment.</p>
+        {% endfor %}
+    </div>
+</div>
+
+  <!-- Pagination Controls -->
+  <div class="d-flex justify-content-between mt-4">
+    <div class="btn-group">
+        {% if page_obj.has_previous %}
+            <a class="btn btn-outline-secondary" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+        {% else %}
+            <span class="btn btn-outline-secondary disabled">Previous</span>
+        {% endif %}
+    </div>
+    <div class="btn-group">
+        {% if page_obj.has_next %}
+            <a class="btn btn-outline-secondary" href="?page={{ page_obj.next_page_number }}">Next</a>
+        {% else %}
+            <span class="btn btn-outline-secondary disabled">Next</span>
+        {% endif %}
+    </div>
+</div>
+  
+{% endblock %}

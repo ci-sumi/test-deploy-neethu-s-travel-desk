@@ -1,0 +1,58 @@
+{% extends "index.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-4  d-flex flex-column max-vh-100">
+    <h3 class="text-center">My Favorite Destinations</h3>
+    
+    <div class="row flex-grow-1" >
+        {% for destination in favorite_destination %}
+        <div class="col-md-4 mb-4">
+            <div class="card shadow-sm h-100">
+                {% if destination.image %}
+                <img src="{{ destination.image.url }}" class="card-img-top" alt="{{ destination.name }}" style="max-height: 200px; object-fit: cover;">
+                {% else %}
+                <img src="{% static 'images/destinationdefault.jpg' %}" class="card-img-top" alt="Default Image" style="max-height: 200px; object-fit: cover;">
+                {% endif %}
+                <div class="card-body">
+                    <h5 class="card-title">{{ destination.name }}</h5>
+                    <p class="card-text"><strong>Country:</strong> {{ destination.country }}</p>
+                    <p class="card-text"><strong>Best Time to Visit:</strong> {{ destination.get_best_time_to_visit_display }}</p>
+                    <p class="card-text"><strong>Budget:</strong> {{ destination.get_budget_type_display }}</p>
+                </div>
+                <div class="card-footer text-center">
+                    <a href="{% url 'destination_detail' destination.id %}" class="btn btn-outline-primary">View Details</a>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="container mt-4  d-flex flex-column min-vh-100">
+            {% comment %} <h3 class="text-center">My Favorite Destinations</h3> {% endcomment %}
+        <div class="d-flex flex-grow-1 justify-content-center align-items-center">
+            <p class="text-center">You have not added any favorites yet.</p>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% if page_obj.has_other_pages %}
+<div class="d-flex justify-content-between mt-4">
+    <div>
+        {% if page_obj.has_previous %}
+            <a class="btn btn-outline-secondary" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+        {% else %}
+            <span class="btn btn-outline-secondary disabled">Previous</span>
+        {% endif %}
+    </div>
+    <div>
+        {% if page_obj.has_next %}
+            <a class="btn btn-outline-secondary" href="?page={{ page_obj.next_page_number }}">Next</a>
+        {% else %}
+            <span class="btn btn-outline-secondary disabled">Next</span>
+        {% endif %}
+    </div>
+</div>
+{% endif %}
+</div>
+
+{% endblock %}
+

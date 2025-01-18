@@ -1,0 +1,51 @@
+{% extends "index.html" %}
+{% load static %}
+
+{% block content %}
+<div class="d-flex justify-content-center align-items-center vh-80">
+    <div class="container text-center mt-4 mb-5" style="max-width: 400px; background-color: #87CEEB; padding: 1.5rem; border-radius: 8px;">
+        <h2 class="mb-4" style="font-size: 1.75rem;">Travel Budget Calculator</h2>
+
+        <!-- Display any error messages from the form -->
+        {% if form.destination.errors %}
+        <div class="alert alert-danger" role="alert">
+            <strong>Please provide a destination!</strong> {{ form.destination.errors|striptags }}
+        </div>
+        {% endif %}
+
+        <!-- Budget Form -->
+        <form method="post" id="budget-form">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <div class="d-flex justify-content-between mt-4">
+                <button type="submit" class="btn btn-primary">Calculate Total Budget</button>
+                <button type="button" class="btn btn-secondary" onclick="openClearModal()">Clear</button>
+            </div>
+        </form>
+
+        {% if total_cost is not None %}
+        <div class="alert alert-success mt-4" role="alert">
+            <h4>Total Estimated Budget: <span class="text-success">${{ total_cost|default:"0" }}</span></h4>
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+<!-- Clear Fields Confirmation Modal -->
+<div class="modal-overlay" id="clearModal" style="display: none;">
+    <div class="modal-content">
+        <h2>Are you sure you want to clear all fields?</h2>
+        <button type="button" class="btn btn-danger" onclick="clearForm()">Yes, clear</button>
+        <button type="button" class="btn btn-secondary" onclick="closeClearModal()">Cancel</button>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block style %}
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+{% endblock %}
+
+{% block script %}
+<script src="{% static 'js/budget_calculator.js' %}"></script>
+{% endblock %}

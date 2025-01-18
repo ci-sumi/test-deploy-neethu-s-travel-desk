@@ -1,0 +1,28 @@
+{% extends 'index.html' %}
+{% block content %}
+{% if messages %}
+        <div class="alert-container position-relative">
+            <div class="mt-3 position-absolute w-90" style="z-index: 10;">
+                {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }} fade-out mb-3" role="alert">
+                        {{ message }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    {% endif %}
+
+<div class="container mt-5" style="background-color:#87CEEB;">
+    <h2 class="text-center mb-4">Contact Desk</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p}}  <!-- Renders the form fields with proper HTML -->
+        <div class="text-center">
+            <button type="submit" class="btn btn-primary">Send Message</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

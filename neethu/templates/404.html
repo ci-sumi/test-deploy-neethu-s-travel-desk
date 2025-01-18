@@ -1,0 +1,11 @@
+
+{% extends 'index.html' %}
+{% load static %}
+{% block content %}
+  <div class="container text-center mt-5">
+    <a href="{% url 'index' %}"><img src="{% static 'images/404.webp' %}" alt="404 Image" style="max-width: 200px; height: auto;"/>
+    </a>
+    <h1 class="mt-4">404 Error</h1>
+    <p>Oops! The page you're looking for doesn't exist.</p>
+  </div>
+{% endblock %}

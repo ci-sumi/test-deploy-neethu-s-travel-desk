@@ -1,0 +1,80 @@
+{% extends 'index.html' %}
+
+{% block content %}
+{% if messages %}
+  <div class="alert-container position-relative">
+    <div class="mt-3 position-absolute w-90" style="z-index: 10;">
+      {% for message in messages %}
+      {% if "error" in message.tags %}
+          <div class="alert alert-danger fade-out mb-3" role="alert">  <!-- Use alert-danger for error messages -->
+            {{ message }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            </div>
+        {% else %}
+        <div class="alert alert-{{ message.tags }} fade-out mb-3" role="alert";>
+          {{ message }}
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+{% endif %}
+  <!-- Full-height container to center content vertically and horizontally -->
+  <div class="container vh-100 d-flex justify-content-center align-items-center">
+    <div class="row justify-content-center">
+      <!-- Center the form using Bootstrap grid classes -->
+      <div class="col-md-20">
+        <div class="card p-4" style="border-color: black;margin-top: 50px;background-color:#87CEEB ;">
+          <!-- Card to give a boxed look -->
+          <h1 class="text-center mb-4">Register Form</h1>
+          <form method="POST" novalidate>
+            {% csrf_token %}
+
+            <!-- Username Field -->
+            <div class="form-group">
+              <label for="id_username" class="form-label">Username</label>
+              <input type="text" name="username" id="id_username" class="form-control" value="{{ form.username.value|default_if_none:'' }}" placeholder="Enter Username" />
+              <div class="text-danger">{{ form.username.errors }}</div>
+            </div>
+
+            <!-- Email Field -->
+            <div class="form-group">
+              <label for="id_email" class="form-label">E-mail</label>
+              <input type="email" name="email" id="id_email" class="form-control" value="{{ form.email.value|default_if_none:'' }}" placeholder="Enter E-mail"/>
+              <div class="text-danger">{{ form.email.errors }}</div>
+            </div>
+
+            <!-- Password Field -->
+            <div class="form-group">
+              <label for="id_password1" class="form-label">Password</label>
+              <input type="password" name="password1" id="id_password1" class="form-control" placeholder="Enter Password" />
+              <div class="text-danger">{{ form.password1.errors }}</div>
+            </div>
+
+            <!-- Confirm Password Field -->
+            <div class="form-group">
+              <label for="id_password2" class="form-label">Confirm Password</label>
+              <input type="password" name="password2" id="id_password2" class="form-control" placeholder="Confirm Password" />
+              <div class="text-danger">{{ form.password2.errors }}</div>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="form-group">
+              <button type="submit" class="btn btn-primary btn-block">Register</button>
+            </div>
+            <div class="text-center">
+              <p>
+                Already have an account? <a href="{% url 'login' %}">Login here</a>
+              </p>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

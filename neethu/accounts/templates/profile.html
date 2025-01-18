@@ -1,0 +1,56 @@
+{% extends "index.html" %}
+{% load static %}
+
+{% block content %}
+{% if messages %}
+          <div class="alert-container position-relative">
+            <div class="mt-3 position-absolute w-90" style=" top:0;z-index: 1050;">
+              {% for message in messages %}
+                <div class="alert alert-{{ message.tags }} fade-out mb-3" role="alert";>
+                  {{ message }}
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+              {% endfor %}
+            </div>
+          </div>
+        {% endif %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header text-center" style="background-color:#87CEEB;">
+                    <h3>Welcome, {{ user.username }}!</h3>
+                </div>
+                <div class="card-body text-center">
+                    <div class="mb-4">
+                        <!-- Profile Image -->
+                        {% if user_profile.profile_picture %}
+                            <img src="{{ user_profile.profile_picture.url }}" class="img-thumbnail rounded-circle" style="width: 150px; height: 150px; object-fit: cover;">
+                        {% else %}
+                            <img src="{% static 'images/defaultprofile.webp' %}" class="img-thumbnail rounded-circle" style="width: 150px; height: 150px; object-fit: cover;">
+                        {% endif %}
+                    </div>
+
+                    <!-- User Information -->
+                    <div class="user-info mb-4">
+                        <p><strong>Username:</strong> {{ user.username }}</p>
+                        <p><strong>Email:</strong> {{ user.email }}</p>
+                    </div>
+
+                    <!-- Buttons for Editing and Deleting Account -->
+                    <div class="d-flex justify-content-between mt-3">
+                        <a href="{% url 'update_profile' %}" class="btn btn-primary">Edit Profile</a>
+                        <a href="{%url 'delete_profile' %}" class="btn btn-danger">Delete Account</a>
+                    </div>
+                </div>
+                <div class="card-footer text-center" style="background-color: #F0F3F5 ;">
+                    
+                    <small>Manage your account settings.</small>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,81 @@
+/* Modal overlay */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    overflow: hidden;
+}
+
+/* Modal content */
+.modal-content {
+    background: white;
+    padding: 20px 10px;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 300px;
+    text-align: center;
+    font-size: 10px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Title */
+.modal-content h2 {
+    font-size: 20px;
+}
+
+/* Modal Buttons */
+.modal-content .btn-danger {
+    background-color: red !important;
+    color: #fff;
+    border: none;
+    padding: 5px 5px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 10px;
+    transition: background-color 0.2s ease;
+    margin-right: 10px
+}
+
+.modal-content .btn-secondary {
+    background-color: white !important;
+    color: black;
+    border-color: blue;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-align: center;
+    transition: background-color 0.3s ease;
+    margin-left: 10px;
+}
+
+.modal-content .btn-danger:hover {
+    background-color: #c9302c;
+}
+
+.modal-content .btn-secondary:hover {
+    background-color: #87CEEB;
+}
+
+/* Disable scrolling when modal is active */
+.no-scroll {
+    overflow: hidden;
+    height: 100%;
+}
+.btn-danger {
+    background-color: #d9534f;
+}
+.btn-secondary {
+    background-color: white;
+}
+.btn-danger:hover {
+    background-color: #c9302c;
+}
+.btn-secondary:hover {
+    background-color: #87CEEB;;
+}

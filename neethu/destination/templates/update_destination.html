@@ -1,0 +1,43 @@
+{% extends "index.html" %}
+{% block content %}
+{% comment %} {% if messages %}
+          <div class="alert-container position-relative">
+            <div class="mt-3 position-absolute w-90" style=" top:0;z-index: 1050;">
+              {% for message in messages %}
+                <div class="alert alert-{{ message.tags }} fade-out mb-3" role="alert";>
+                  {{ message }}
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+              {% endfor %}
+            </div>
+          </div>
+        {% endif %}
+       
+<div class="container mt-5">
+    <h2 class="text-center">
+        {% if is_update %}
+        Update Destination
+        {% else %}
+        Create Destination
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">
+            {% if is_update %}
+            Update
+            {% else %}
+            Save
+            {% endif %}
+        </button>
+    </form>
+    {% if is_update %}
+        <div class="text-center mt-3">
+            <a href="{% url 'destination_update' destination.id %}" class="btn btn-secondary">Cancel</a>
+        </div>
+    {% endif %}
+    
+</div> {% endcomment %}
+
+{% endblock %}

@@ -1,0 +1,8 @@
+<!-- confirm_delete.html -->
+<h2>Delete Account</h2>
+<p>Are you sure you want to delete your account, {{ user.username }}?</p>
+<form method="POST">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">Delete Account</button>
+    <a href="{% url 'profile_view' %}" class="btn btn-secondary">Cancel</a>
+</form>
