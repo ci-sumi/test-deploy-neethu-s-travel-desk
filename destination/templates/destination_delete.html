@@ -9,6 +9,10 @@
         </form>
     </div>
 </div>
+{% block script %}
+<script src="{% static 'js/destination_deletion.js' %}"></script>
+{% endblock %}
+
 <style>
     /* Modal overlay */
     .modal-overlay {
@@ -65,14 +69,3 @@
     }
 </style>
 
-<script>
-    // Function to open the confirmation modal
-    function openModal() {
-        document.getElementById("deleteModal").style.display = "flex";
-    }
-
-    // Function to close the confirmation modal
-    function closeModal() {
-        document.getElementById("deleteModal").style.display = "none";
-    }
-</script>
