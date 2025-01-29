@@ -132,9 +132,9 @@
       <h1>Neethu's Travel Desk <i class="fa-solid fa-plane small plane""></i></h1>
       <h3>Share your dream destination with us</h3>
       {%if user.is_authenticated%}
-      <a href=" {%url 'mydestination' %}" class="btn"><i class="fa-solid fa-map-marker-alt fa-xs"></i> My
+      <a href=" {%url 'mydestination' %}" class="btn" id="mybtn"><i class="fa-solid fa-map-marker-alt fa-xs"></i> My
           Destinations</a>
-          <a href="{%url 'my_favorites'%}" class="btn"><i class="fa-solid fa-heart fa-xs"></i> My Favorites</a>
+          <a href="{%url 'my_favorites'%}" class="btn" id="mybtn"><i class="fa-solid fa-heart fa-xs"></i> My Favorites</a>
           {% else %}
           <a href="{% url 'login' %}" class="btn">Add Your Destinations</a>
           {% endif %}
