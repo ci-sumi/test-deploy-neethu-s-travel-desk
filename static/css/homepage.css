@@ -1,14 +1,21 @@
+* {
+  overflow-x: hidden !important;
+}
 html,
 body {
   height: 100%;
   margin: 0;
   font-family: 'Roboto', sans-serif;
+  overflow-x: hidden;
+  max-width: 100%;
 }
 
 body {
   display: flex;
   flex-direction: column;
   background-color: #FFFFFF;
+ 
+
   /* color: #003366;  */
 
 }
@@ -100,7 +107,7 @@ body {
   align-items: center;
   padding: 100px 80px;
   color: #fff;
-  padding: 100px 80px;
+ 
 
 }
 .small{
