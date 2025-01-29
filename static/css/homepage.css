@@ -163,6 +163,10 @@ body {
   border-radius: 5px; /* Rounded corners */
   text-align: center; /* Center text */
   transition: background-color 0.3s ease; /* Smooth transition */
+  
+}
+#mybtn{
+  margin-top: 25px;
 }
 .btn:hover {
   background-color:#FFB6C1; /* Darker shade on hover */
@@ -540,4 +544,10 @@ footer{
 .navbar-toggler:focus {
   outline: none;  /* Remove default outline */
   box-shadow: none; /* Remove any shadow if it's applied */
+}
+
+@media (max-width: 768px) {
+  .button {
+    margin-top: 20px;
+  }
 }
