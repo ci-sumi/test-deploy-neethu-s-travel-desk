@@ -1,5 +1,15 @@
 {% extends "index.html" %}
 {% load static %}
+{% block style %}
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+{% endblock %}
+
+{% block script %}
+<script src="{% static 'js/budget_calculator.js' %}"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
+{% endblock %}
 
 {% block content %}
 <div class="d-flex justify-content-center align-items-center vh-80">
@@ -42,10 +52,4 @@
 
 {% endblock %}
 
-{% block style %}
-<link rel="stylesheet" href="{% static 'css/style.css' %}">
-{% endblock %}
 
-{% block script %}
-<script src="{% static 'js/budget_calculator.js' %}"></script>
-{% endblock %}
