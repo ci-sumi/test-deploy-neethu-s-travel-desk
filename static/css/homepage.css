@@ -218,6 +218,8 @@ main {
   margin-top: 7px;
   box-shadow: 0 4px 8px black;
   flex-grow: 1;
+  width: 100%; /* Ensure it takes full width */
+  padding: 0 10px; /* Add some padding if needed */
 }
 
 .article {
