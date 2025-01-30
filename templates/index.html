@@ -1,8 +1,10 @@
-{% load static %}
+
 <!DOCTYPE html>
+
 <html lang="en">
 
 <head>
+  {% load static %}
   <!-- Meta tags for character set and responsive design -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -50,8 +52,6 @@
           <a class="nav-link" href="{% url 'contact'%}">
             <i class="fa-solid fa-envelope fa-xs"></i> Contact Us</a>
         </li>
-
-
         {% if user.is_authenticated %}
         <li class="nav-item">
           <a class="nav-link" href="{%url 'destination_create'%}">
@@ -129,7 +129,7 @@
   <section class="intro">
     <div class="bg-img" style="background-image: url(https://wallpapersite.com/images/pages/pic_w/4792.jpg);"></div>
     <div class="intro-area">
-      <h1>Neethu's Travel Desk <i class="fa-solid fa-plane small plane""></i></h1>
+      <h1>Neethu's Travel Desk <i class="fa-solid fa-plane small plane"></i></h1>
       <h3>Share your dream destination with us</h3>
       {%if user.is_authenticated%}
       <a href=" {%url 'mydestination' %}" class="btn" id="mybtn"><i class="fa-solid fa-map-marker-alt fa-xs"></i> My
@@ -145,7 +145,7 @@
       <div class="col-md-4">
         <div class="article">
           <img src= "{% static 'images/taj.webp' %}" alt="tajmahal" class="img-fluid">
-          <h2 class="location"><b>TAJMAHAL</b> <br /> An exquisite symbol of love</h2>
+          <h2 class="location"><b>TAJMAHAL</b> <br/> An exquisite symbol of love</h2>
           <p class="desc">The Taj Mahal is a stunning white marble mausoleum located in Agra, India. Built by Mughal
             Emperor Shah Jahan in memory of his beloved wife Mumtaz Mahal, it was completed in 1653. The Taj Mahal
             showcases intricate architectural styles that blend Persian, Islamic, and Indian influences. Renowned for
@@ -159,12 +159,12 @@
       </div>
       <div class="col-md-4">
         <div class="article quote-box">
-          <p>“The world is a book and those who do not travel read only one page.” – Saint Augustine – </span>
+          <p>“The world is a book and those who do not travel read only one page.” – Saint Augustine –
           </p>
         </div>
         <div class="article">
           <img src="{% static 'images/niagara.jpg' %}" alt="niagara" class="img-fluid">
-          <h2 class="location"><b>Niagara Falls</b> <br />Majestic natural wonder</h2>
+          <h2 class="location"><b>Niagara Falls</b> <br/>Majestic natural wonder</h2>
           <p class="desc">Niagara Falls is located on the border between the United States and Canada, comprising three
             spectacular waterfalls: Horseshoe Falls, American Falls, and Bridal Veil Falls. Renowned for its
             breathtaking beauty and powerful flow, it attracts millions of visitors each year. The area offers stunning
@@ -178,7 +178,7 @@
       <div class="col-md-4">
         <div class="article">
           <img src="{% static 'images/nile.jpg' %}" alt="nile" class="img-fluid">
-          <h2 class="location"><b>Nile River</b> <br />World's longest river</h2>
+          <h2 class="location"><b>Nile River</b> <br/>World's longest river</h2>
           <p class="desc">The Nile River is the longest river in the world, flowing over 4,135 miles through
             northeastern Africa. It traverses eleven countries, including Uganda, Sudan, and Egypt, and is historically
             significant as the lifeblood of ancient Egyptian civilization. Renowned for its fertile banks, the Nile
@@ -189,7 +189,7 @@
           </div>
         </div>
         <div class="article quote-box">
-          <p>“Travel is never a matter of money but of courage.”<br /> <span>- Paolo Coelho -</span></p>
+          <p>“Travel is never a matter of money but of courage.”<br/> <span>- Paolo Coelho -</span></p>
         </div>
       </div>
     </div>
@@ -240,7 +240,7 @@
 
           <!-- Twitter -->
           <a data-mdb-ripple-init class="btn btn-outline btn-floating m-1" href="https://twitter.com" role="button"
-            style="background-color: transparent;border: 2px solid #FF007F;"><i class="fab fa-x"></i></i></a>
+            style="background-color: transparent;border: 2px solid #FF007F;"><i class="fab fa-x"></i></a>
 
           <!-- Google -->
           <a data-mdb-ripple-init class="btn btn-outline btn-floating m-1" href="https://google.com" role="button"
@@ -263,11 +263,13 @@
         <div class="text-center">
           <p style="color:black">&copy; 2024 Layali. All rights reserved.</p>
         </div>
+      </div>
     </footer>
+  </div>
 {% block script %}
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
 {% endblock %}
-</body
+</body>
