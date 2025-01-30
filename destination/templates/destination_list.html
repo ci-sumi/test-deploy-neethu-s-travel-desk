@@ -22,7 +22,7 @@
     <h3 class="text-center">Popular Destinations</h3>
     <div class="row mb-4">
         <div class="col-md-12">
-            <form method="get" action="{% url 'search' %}">
+            <form method="get">
                 <div class="input-group">
                     <input type="text" class="form-control" name="query" placeholder="Search destinations" value="{{ request.GET.query }}">
                     <div class="input-group-append">
