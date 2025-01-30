@@ -31,14 +31,14 @@
       <div class="col-md-20">
         <div class="card p-4" style="border-color: black;margin-top: 50px;background-color:#87CEEB ;">
           <!-- Card to give a boxed look -->
-          <h1 class="text-center mb-4">Register Form</h1>
+          <h2 class="text-center mb-4">Register Form</h2>
           <form method="POST" novalidate>
             {% csrf_token %}
 
             <!-- Username Field -->
             <div class="form-group">
               <label for="id_username" class="form-label">Username</label>
-              <input type="text" name="username" id="id_username" class="form-control" value="{{ form.username.value|default_if_none:'' }}" placeholder="Enter Username" />
+              <input type="text" name="username" id="id_username" class="form-control" value="{{ form.username.value|default_if_none:'' }}" placeholder="Enter Username"/>
               <div class="text-danger">{{ form.username.errors }}</div>
             </div>
 
@@ -52,14 +52,14 @@
             <!-- Password Field -->
             <div class="form-group">
               <label for="id_password1" class="form-label">Password</label>
-              <input type="password" name="password1" id="id_password1" class="form-control" placeholder="Enter Password" />
+              <input type="password" name="password1" id="id_password1" class="form-control" placeholder="Enter Password"/>
               <div class="text-danger">{{ form.password1.errors }}</div>
             </div>
 
             <!-- Confirm Password Field -->
             <div class="form-group">
               <label for="id_password2" class="form-label">Confirm Password</label>
-              <input type="password" name="password2" id="id_password2" class="form-control" placeholder="Confirm Password" />
+              <input type="password" name="password2" id="id_password2" class="form-control" placeholder="Confirm Password"/>
               <div class="text-danger">{{ form.password2.errors }}</div>
             </div>
 
