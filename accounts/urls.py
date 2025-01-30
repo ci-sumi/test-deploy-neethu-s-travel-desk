@@ -8,10 +8,10 @@ urlpatterns = [
     # path('admin/', admin.site.urls),
     path('',views.index,name='index'),
     path('register',views.register,name='register'),
-    path('accounts/login',views.login,name='login'),
+    path('login',views.login,name='login'),
     path('logout',CustomLogoutView.as_view(),name='logout'),
     path('profile_view',views.profile_view,name='profile_view'),
-    path('accounts/update_profile',views.update_profile,name='update_profile'),
+    path('update_profile',views.update_profile,name='update_profile'),
     path('delete_profile',views.delete_profile,name='delete_profile'),
     path('contact',views.contact,name='contact'),
    
