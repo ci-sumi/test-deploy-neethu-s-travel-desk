@@ -55,13 +55,13 @@
         {% if user.is_authenticated %}
         <li class="nav-item">
           <a class="nav-link" href="{%url 'destination_create'%}">
-            <i class="fa-solid fa-plus-circle fa-xs"></i> Destinations
+          <i class="fa-solid fa-plus-circle fa-xs"></i> Destinations
           </a>
         </li>
         <!-- My Destinations Link -->
         <li class="nav-item">
           <a class="nav-link" href="{%url 'budget_calculator'%}">
-            <i class="fas fa-calculator fa-xs"></i> TripCalc
+          <i class="fas fa-calculator fa-xs"></i> TripCalc
           </a>
         </li>
         <!-- Favorite Destinations Link -->
@@ -106,6 +106,7 @@
         </li>
         <li class="nav-item"><a href="{%url 'register' %}" class="nav-link btn-signup">
             <i class="fa-solid fa-user-plus fa-xs"></i> Signup</a></li>
+        </li>
         {% endif %}
 
       </ul>
@@ -234,7 +235,7 @@
       <div class="container p-4">
         <!-- Section: Social media -->
         <section class="mb-4">
-          <h2></h2>
+          <h2 calss="mb-4"></h2>
           <!-- Facebook -->
           <a data-mdb-ripple-init class="btn btn-outline btn-floating m-1" href="https://www.facebook.com" role="button"
             style="background-color: transparent;border: 2px solid #FF007F;"><i class="fab fa-facebook-f"></i></a>
