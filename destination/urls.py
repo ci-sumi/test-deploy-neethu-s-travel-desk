@@ -19,9 +19,25 @@ urlpatterns = [
     path('destination/create/', destination_create, name='destination_create'),
     path('<int:id>/', destination_detail, name='destination_detail'),
     path('my-destinations/', mydestination, name='mydestination'),
-    path('update/<int:destination_id>/', destination_update, name='destination_update'),
-    path('delete/<int:destination_id>/', destination_delete, name='destination_delete'),
-    path('favorite/<int:destination_id>/', favorite_destination, name='favorite_destination'),
+    path(
+        'update/<int:destination_id>/',
+        destination_update,
+        name='destination_update'
+    ),
+    path(
+        'delete/<int:destination_id>/',
+        destination_delete,
+        name='destination_delete'
+    ),
+    path(
+        'favorite/<int:destination_id>/',
+        favorite_destination,
+        name='favorite_destination'
+    ),
     path('my-favorites/', my_favorites, name='my_favorites'),
-    path('like/<int:destination_id>/', likes_destination, name='likes_destination'),
+    path(
+        'like/<int:destination_id>/',
+        likes_destination,
+        name='likes_destination'
+    ),
 ]
