@@ -1,26 +1,30 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login as auth_login, authenticate
 from django.contrib.auth.forms import UserCreationForm
-from .forms import SignupForm
 from django.contrib import messages
 from django.contrib.auth.views import LogoutView
 from django.urls import reverse_lazy
-from .forms import ContactForm
 from django.core.paginator import Paginator
 from django.db.models import Q
 from django import forms
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import update_session_auth_hash
-from .models import UserProfile
-from .forms import ProfileUpdateForm, ProfileImageUpdateForm, PasswordUpdateForm
 from django.http import HttpResponseNotFound, HttpResponseRedirect
 import logging
 
+from .forms import (
+    SignupForm, ContactForm, ProfileUpdateForm,
+    ProfileImageUpdateForm, PasswordUpdateForm
+)
+from .models import UserProfile
+
 logger = logging.getLogger(__name__)
+
 
 # View for rendering home page
 def index(request):
     return render(request, 'index.html', {'show_services': True})
+
 
 # Handles user registration by rendering and processing the registration form.
 def register(request):
@@ -31,11 +35,12 @@ def register(request):
             messages.success(request, "Account created successfully")
             return redirect('login')
         else:
-            messages.error(request, "Error")
+            messages.error(request, "Error in registration.")
     else:
         form = SignupForm()
 
     return render(request, 'register.html', {'form': form})
+
 
 # Handles user login by validating and authenticating credentials.
 def login(request):
@@ -57,6 +62,7 @@ def login(request):
 
     return render(request, 'login.html', {'show_services': False})
 
+
 # Custom Logout view that adds a success message upon logout
 class CustomLogoutView(LogoutView):
     next_page = reverse_lazy('login')
@@ -65,20 +71,22 @@ class CustomLogoutView(LogoutView):
         messages.success(request, "You have been logged out successfully.")
         return super().dispatch(request, *args, **kwargs)
 
+
 # Handles the contact form submission and displays success or error messages
 def contact(request):
     if request.method == "POST":
         form = ContactForm(request.POST)
         if form.is_valid():
             form.save()
-            messages.success(request, "Your contact form is submitted")
+            messages.success(request, "Your contact form has been submitted.")
             return redirect('index')
         else:
-            messages.error(request, "Please fill the fields properly")
+            messages.error(request, "Please fill the fields properly.")
     else:
         form = ContactForm()
 
     return render(request, 'contact.html', {'form': form})
+
 
 # View for rendering profile page
 @login_required
@@ -92,7 +100,7 @@ def profile_view(request):
         user_profile = UserProfile.objects.create(user=request.user)
     except Exception as e:
         logger.error(f"Error in profile_view: {e}")
-        return HttpResponseNotFound("An error occurred. Please try again later.")
+        return HttpResponseNotFound("An error occurred.")
 
     context = {
         'user': request.user,
@@ -101,33 +109,28 @@ def profile_view(request):
 
     return render(request, 'profile.html', context)
 
+
 # View for updating profile
-from django.shortcuts import render, redirect
-from django.contrib import messages
-from django.contrib.auth.decorators import login_required
-from django.contrib.auth import update_session_auth_hash
-from .forms import ProfileUpdateForm, ProfileImageUpdateForm, PasswordUpdateForm
-from .models import UserProfile
-import logging
-
-logger = logging.getLogger(__name__)
-
 @login_required
 def update_profile(request):
     try:
         # Ensure the UserProfile exists
-        user_profile, created = UserProfile.objects.get_or_create(user=request.user)
+        user_profile, created = UserProfile.objects.get_or_create(
+            user=request.user)
     except Exception as e:
         logger.error(f"Error in update_profile (UserProfile): {e}")
         messages.error(request, "An error occurred. Please try again later.")
         return redirect('profile_view')
 
     if request.method == 'POST':
-        profile_form = ProfileUpdateForm(request.POST, instance=request.user)  # Update User model
-        password_form = PasswordUpdateForm(request.POST)  # No user argument
-        image_form = ProfileImageUpdateForm(request.POST, request.FILES, instance=user_profile)
+        profile_form = ProfileUpdateForm(request.POST, instance=request.user)
+        password_form = PasswordUpdateForm(request.POST)
+        image_form = ProfileImageUpdateForm(
+            request.POST, request.FILES, instance=user_profile
+        )
 
-        if profile_form.is_valid() and password_form.is_valid() and image_form.is_valid():
+        if (profile_form.is_valid() and password_form.is_valid() and
+                image_form.is_valid()):
             try:
                 # Save the profile form (User model)
                 profile_form.save()
@@ -137,22 +140,31 @@ def update_profile(request):
                 if new_password:
                     request.user.set_password(new_password)
                     request.user.save()
-                    update_session_auth_hash(request, request.user)  # Keep user logged in
+                    update_session_auth_hash(request, request.user)
 
                 # Save the image form (UserProfile model)
                 image_form.save()
 
-                messages.success(request, 'Your profile has been successfully updated')
+                messages.success(
+                    request, 'Your profile has been successfully updated.'
+                )
                 return redirect('profile_view')
             except Exception as e:
                 logger.error(f"Error in update_profile (save): {e}")
-                messages.error(request, "An error occurred while updating your profile. Please try again later.")
+                messages.error(
+                    request,
+                    "An error occurred while updating your profile. "
+                    "Please try again later."
+                )
         else:
-            logger.error(f"Form errors: {profile_form.errors}, {password_form.errors}, {image_form.errors}")
+            logger.error(
+                f"Form errors: {profile_form.errors}, {password_form.errors}, "
+                f"{image_form.errors}"
+            )
             messages.error(request, "Please correct the errors below.")
     else:
-        profile_form = ProfileUpdateForm(instance=request.user)  # Update User model
-        password_form = PasswordUpdateForm()  # No user argument
+        profile_form = ProfileUpdateForm(instance=request.user)
+        password_form = PasswordUpdateForm()
         image_form = ProfileImageUpdateForm(instance=user_profile)
 
     return render(request, 'update_profile.html', {
@@ -160,15 +172,18 @@ def update_profile(request):
         'password_form': password_form,
         'image_form': image_form,
     })
+
+
 # View for deleting profile
 @login_required
 def delete_profile(request):
     if request.method == 'POST':
         request.user.delete()
-        messages.success(request, 'Your profile has been deleted')
+        messages.success(request, 'Your profile has been deleted.')
         return redirect('index')
 
     return render(request, 'delete_profile.html', {'user': request.user})
+
 
 # Custom 404 view
 def custom_404(request, exception):
