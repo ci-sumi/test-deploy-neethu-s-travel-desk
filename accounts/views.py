@@ -85,7 +85,7 @@ def contact(request):
     return render(request,'contact.html',{'form':form})
     
 # View for rendering profile page
-@login_required
+# @login_required
 def profile_view(request):
     try:
         user_profile = UserProfile.objects.get(user=request.user)
@@ -100,7 +100,7 @@ def profile_view(request):
     return render(request, 'profile.html', context)
 
 # View for updating profile
-@login_required
+# @login_required
 def update_profile(request):
     if request.method == 'POST':
         profile_form = ProfileUpdateForm(request.POST, instance=request.user)
@@ -131,7 +131,7 @@ def update_profile(request):
                           'image_form': image_form})
     
 # View for deleting profile    
-@login_required
+# @login_required
 def delete_profile(request):
         if request.method == 'POST':
             request.user.delete()
