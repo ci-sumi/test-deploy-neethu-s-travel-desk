@@ -20,6 +20,6 @@ class BudgetCalculatorForm(forms.ModelForm):
             'transportation_cost': forms.NumberInput(attrs={'class': 'form-control', 'placeholder': '$0.00'}),
             'food_cost': forms.NumberInput(attrs={'class': 'form-control', 'placeholder': '$0.00'}),
             'activity_cost': forms.NumberInput(attrs={'class': 'form-control', 'placeholder': '$0.00'}),
-            'number_of_adults': forms.NumberInput(attrs={'class': 'form-control', 'min': 1, 'value': 1}),
-            'number_of_infants': forms.NumberInput(attrs={'class': 'form-control', 'min': 0, 'value': 0}),
+            'number_of_adults': forms.NumberInput(attrs={'class': 'form-control'}),
+            'number_of_infants': forms.NumberInput(attrs={'class': 'form-control'}),
         }
