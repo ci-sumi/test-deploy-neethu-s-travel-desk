@@ -1,5 +1,6 @@
-
+/* exported openModal, closeModal */
     // Function to open the confirmation modal
+
     function openModal() {
         document.getElementById("deleteModal").style.display = "flex";
         document.body.classList.add("no-scroll");

@@ -1,4 +1,5 @@
 // Function to open the confirmation modal
+/* exported openClearModal, clearForm */
 function openModal() {
     document.getElementById("deleteModal").style.display = "flex";
   }

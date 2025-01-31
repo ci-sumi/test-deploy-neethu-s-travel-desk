@@ -1,3 +1,5 @@
+/* jshint esversion: 6 */
+/* exported openClearModal, clearForm */
 // Function to open the clear confirmation modal
 function openClearModal() {
     document.getElementById("clearModal").style.display = "flex";
