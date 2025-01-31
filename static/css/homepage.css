@@ -473,8 +473,7 @@ footer{
 
 /* Change icon color when clicked */
 .heartbutton.clicked .fa-heart {
-  color: red; 
-  border-color: none;/* Heart button stays red when clicked */
+  border: 2px solid red;
 }
 
 .likebutton.clicked .fa-thumbs-up {
