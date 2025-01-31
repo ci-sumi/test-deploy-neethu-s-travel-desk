@@ -83,7 +83,7 @@ AUTHENTICATION_BACKENDS=[
 ]
 
 ROOT_URLCONF = 'core.urls'
-LOGIN_URL = '/accounts/login/'
+# LOGIN_URL = '/accounts/login/'
 
 TEMPLATES = [
     {
