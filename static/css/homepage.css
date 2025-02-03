@@ -152,7 +152,7 @@ body {
 .intro h3 {
   font: 30px 'Do Hyeon', sans-serif;
   margin-bottom: 20px;
-  color: #fff;
+  color:#111;
 }
 
 .btn {
@@ -388,7 +388,7 @@ hr {
 }
 
 h2 {
-  color: #343a40;
+  color:  #111;;
   font-weight: 700;
   margin-bottom: 50px;
 }
@@ -410,7 +410,22 @@ footer{
  
   }
  
+  div.article {
+    color: #333; /* Darker text */
+    background-color: #fff; /* Light background */
+}
 
+span.date, span.comment {
+    color: #555; /* Darker color for better readability */
+}
+.service-card p {
+  color: #333; /* Dark text */
+  background-color: #f9f9f9; /* Light background */
+}
+h2.location {
+   /* Darker text color for better contrast */
+  background-color: #f8f9fa; /* Light background color */
+}
 
 /* Flashing effect */
 
