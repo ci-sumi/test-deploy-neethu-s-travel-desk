@@ -1,13 +1,16 @@
 {% extends "index.html" %}
 {% load static %}
+
 {% block style %}
-<link rel="stylesheet" href="{% static 'css/modal.css' %}">
+<link rel="preload" href="{% static 'css/modal.css' %}">
 {% endblock %}
+
 {% block script %}
-<script src="{% static 'js/destination_deletion.js' %}"></script>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Load only necessary scripts -->
+<script src="{% static 'js/destination_deletion.js' %}" defer></script>
+{% if needs_bootstrap_js %}
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" defer></script>
+{% endif %}
 {% endblock %}
 
 {% block content %}
@@ -25,15 +28,17 @@
         </div>
     </div>
 {% endif %}
+
 <div class="container mt-5"> 
     <div class="card shadow-lg" style="border: 2px solid #3498db;">
         <div class="row g-0">
             <div class="col-md-6">
                 {% if destination.image %}
                 <img src="{{ destination.image.url }}" alt="{{ destination.name }}" class="img-fluid rounded-start"
-                    style="width: 100%; height: 400px; object-fit: cover;">
+                    style="width: 100%; height: 400px; object-fit: cover; aspect-ratio: 16 / 9;">
                 {% else %}
-                <img src="{% static 'images/destinationdefault.jpg' %}" class="card-img-top" alt="Default Image" style="width: 100%; height: 400px; object-fit: cover;">
+                <img src="{% static 'images/destinationdefault.jpg' %}" class="card-img-top" alt="Default Image" 
+                    style="width: 100%; height: 400px; object-fit: cover; aspect-ratio: 16 / 9;">
                 {% endif %}
             </div>
             <div class="col-md-6">
@@ -52,23 +57,29 @@
                         <strong>Description:</strong>
                         {{ destination.description }}
                     </p>
+
                     <!-- Favorite Button -->
-                    <a href="{% url 'favorite_destination' destination.id %}" id="heart-button" class="btn btn-outline-primary heartbutton" style="text-decoration: none; background-color: transparent; border: none; outline: none;">
-                        <i class="fas fa-heart" id="heart-icon"></i>
-                    </a>
+                    <form action="{% url 'favorite_destination' destination.id %}" method="post" id="heart-button" style="display: inline;">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-outline-primary heartbutton" style="background-color: transparent; border: none; outline: none;" aria-label="Add to favorites">
+                            <i class="fas fa-heart" id="heart-icon"></i>
+                        </button>
+                    </form>
+
                     <!-- Like Button -->
                     <form action="{% url 'likes_destination' destination.id %}" method="post" id="like-button" style="display: inline;">
                         {% csrf_token %}
-                        <button type="submit" class="btn btn-outline-primary likebutton" style="background-color: transparent; border: none;">
+                        <button type="submit" class="btn btn-outline-primary likebutton" style="background-color: transparent; border: none;" aria-label="Like this destination">
                             <i class="fas fa-thumbs-up"></i>
                             <span>{{ destination.total_likes }} likes</span>
                         </button>
                     </form>
+
                     {% if user.is_authenticated and user == destination.user %}
-                    <a href="{% url 'destination_update' destination.id %}" class="btn btn-outline-info mr-2" style="background-color: transparent; border: none;">
+                    <a href="{% url 'destination_update' destination.id %}" class="btn btn-outline-info mr-2" aria-label="Edit destination">
                         <i class="fas fa-edit"></i>
                     </a>
-                    <a href="#" onclick="openModal()" class="btn btn-outline-danger trash-button" style="background-color: transparent;">
+                    <a href="#" onclick="openModal()" class="btn btn-outline-danger trash-button" aria-label="Delete destination">
                         <i class="fas fa-trash"></i>
                     </a>
                     {% endif %}
@@ -79,15 +90,15 @@
 
     <div class="text-center mt-4">
         <a href="{% url 'destination_list' %}" class="btn btn-secondary">
-            <i class="fas fa-arrow-left" style="text-decoration: none;"></i> Back to Destinations
+            <i class="fas fa-arrow-left"></i> Back to Destinations
         </a>
     </div>
 </div>
 
 <!-- Confirmation Modal -->
 <div class="modal-overlay" id="deleteModal" style="display: none;">
-    <div class="modal-content">
-        <h2>Are you sure you want to delete "{{ destination.name }}"?</h2>
+    <div class="modal-content" role="dialog" aria-labelledby="modalTitle">
+        <h2 id="modalTitle">Are you sure you want to delete "{{ destination.name }}"?</h2>
         <form method="post" action="{% url 'destination_delete' destination.id %}">
             {% csrf_token %}
             <button type="submit" class="btn btn-danger">Yes, delete</button>
