@@ -35,10 +35,10 @@
             <div class="col-md-6">
                 {% if destination.image %}
                 <img src="{{ destination.image.url }}" alt="{{ destination.name }}" class="img-fluid rounded-start"
-                    style="width: 100%; height: 400px; object-fit: cover; aspect-ratio: 16 / 9;">
+                    width: 600; height: 400p; style="object-fit: cover; aspect-ratio: 16 / 9;"loading="lazy">
                 {% else %}
                 <img src="{% static 'images/destinationdefault.jpg' %}" class="card-img-top" alt="Default Image" 
-                    style="width: 100%; height: 400px; object-fit: cover; aspect-ratio: 16 / 9;">
+                    width: 100%; height: 400; style="object-fit: cover; aspect-ratio: 16 / 9;"loading="lazy">
                 {% endif %}
             </div>
             <div class="col-md-6">
