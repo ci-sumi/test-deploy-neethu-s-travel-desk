@@ -39,9 +39,9 @@
             <div class="card shadow-sm h-100">
                 <!-- Destination Image (Optional) -->
                 {% if destination.image %}
-                <img src="{{ destination.image.url }}" class="card-img-top" alt="{{ destination.name }}" style="max-height: 200px; object-fit: cover;">
+                <img srcset="{{ destination.image.url }}" class="card-img-top" alt="{{ destination.name }}" style="max-height: 200px; object-fit: cover;">
                 {% else %}
-                <img src="{% static 'images/destinationdefault.jpg' %}" class="card-img-top" alt="Default Image" style="max-height: 200px; object-fit: cover;">
+                <img srcset="{% static 'images/destinationdefault.jpg' %}" class="card-img-top" alt="Default Image" style="max-height: 200px; object-fit: cover;">
                 {% endif %}
 
                 <div class="card-body">
@@ -95,3 +95,4 @@
 </div>
   
 {% endblock %}
+
