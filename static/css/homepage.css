@@ -3,9 +3,10 @@ html,
 body {
   height: 100%;
   margin: 0;
-  font-family: 'Roboto', sans-serif;
+  /* font-family: 'Roboto', sans-serif; */
   overflow-x: hidden;
   max-width: 100%;
+  font-family: Arial, sans-serif; background: #fff; 
 }
 
 body {
@@ -145,7 +146,7 @@ body {
 
 
 .intro h1 {
-  font: 60px 'Luckiest Guy', cursive;
+  font: 57px 'Luckiest Guy', cursive;
 
 }
 
@@ -173,7 +174,9 @@ body {
   color:black;
 }
 
-
+.bg-img {
+  aspect-ratio: 16 / 9;
+}
 .intro-area {
   animation: slidein 1s 1s forwards;
   opacity: 0;
