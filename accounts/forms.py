@@ -75,19 +75,22 @@ class PasswordUpdateForm(forms.Form):
         label="New Password",
         widget=forms.PasswordInput(attrs={'class': 'form-control'}),
         help_text="Enter a new password.",
+         required=False,
     )
     new_password2 = forms.CharField(
         label="Confirm Password",
         widget=forms.PasswordInput(attrs={'class': 'form-control'}),
         help_text="Re-enter the new password for confirmation.",
+         required=False,
     )
 
     def clean(self):
         cleaned_data = super().clean()
         new_password1 = cleaned_data.get("new_password1")
         new_password2 = cleaned_data.get("new_password2")
-        if new_password1 and new_password2 and new_password1 != new_password2:
-            raise forms.ValidationError("Passwords do not match.")
+        if new_password1 or new_password2:
+            if new_password1 != new_password2:
+                raise forms.ValidationError("Passwords do not match.")
         return cleaned_data
 
 
