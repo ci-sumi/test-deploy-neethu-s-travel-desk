@@ -1,18 +1,20 @@
 from django.db import models
 from accounts.models import Destination
 from decimal import Decimal
+from django.core.validators import MinValueValidator
+
 
 
 class BudgetCalculator(models.Model):
     destination = models.ForeignKey(
         Destination, on_delete=models.CASCADE, related_name="budgets"
     )
-    accommodation_cost = models.DecimalField(max_digits=10, decimal_places=2)
-    transportation_cost = models.DecimalField(max_digits=10, decimal_places=2)
-    food_cost = models.DecimalField(max_digits=10, decimal_places=2)
-    activity_cost = models.DecimalField(max_digits=10, decimal_places=2)
-    number_of_adults = models.IntegerField(default=1)
-    number_of_infants = models.IntegerField(default=0)
+    accommodation_cost = models.DecimalField(max_digits=10, decimal_places=2,validators=[MinValueValidator(0)])
+    transportation_cost = models.DecimalField(max_digits=10, decimal_places=2,validators=[MinValueValidator(0)])
+    food_cost = models.DecimalField(max_digits=10, decimal_places=2,validators=[MinValueValidator(0)])
+    activity_cost = models.DecimalField(max_digits=10, decimal_places=2,validators=[MinValueValidator(0)])
+    number_of_adults = models.IntegerField(default=1,validators=[MinValueValidator(0)])
+    number_of_infants = models.IntegerField(default=0,validators=[MinValueValidator(0)])
 
     def total_cost(self):
         """Calculate the total cost based on the inputs."""
