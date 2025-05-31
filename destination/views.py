@@ -9,6 +9,7 @@ from accounts.models import Destination
 
 
 # Handles the search functionality and pagination for the list of destinations
+@login_required
 def destination_list(request):
     form = DestinationSearchForm(request.GET or None)
     query = request.GET.get('query', '')
@@ -57,6 +58,7 @@ def destination_create(request):
 
 
 # Displays the details of a single destination
+@login_required
 def destination_detail(request, id):
     destination = get_object_or_404(Destination, id=id)
     return render(request, 'destination_detail.html', {
@@ -75,6 +77,7 @@ def mydestination(request):
 
 
 # Allows the user to update the details of an existing destination
+@login_required
 def destination_update(request, destination_id):
     destination = get_object_or_404(Destination, id=destination_id)
     if request.method == 'POST':
@@ -95,6 +98,7 @@ def destination_update(request, destination_id):
 
 
 # Deletes a destination after user confirmation
+@login_required
 def destination_delete(request, destination_id):
     destination = get_object_or_404(Destination, id=destination_id)
     if request.method == 'POST':
@@ -134,6 +138,7 @@ def my_favorites(request):
 
 
 # Allows the user to like or unlike a destination
+@login_required
 def likes_destination(request, destination_id):
     destination = get_object_or_404(Destination, id=destination_id)
     if request.user in destination.likes.all():
