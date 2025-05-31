@@ -1,8 +1,10 @@
 from django.shortcuts import render, redirect
 from .forms import BudgetCalculatorForm
 from .models import BudgetCalculator
+from django.contrib.auth.decorators import login_required
 
 #Allow user to calculate their budget
+@login_required
 def budget_calculator(request):
     total_cost = None
 
