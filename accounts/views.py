@@ -129,14 +129,14 @@ def update_profile(request):
             request.POST, request.FILES, instance=user_profile
         )
 
-        if (profile_form.is_valid() and password_form.is_valid() and
-                image_form.is_valid()):
+        if (profile_form.is_valid() and image_form.is_valid()):
             try:
                 # Save the profile form (User model)
                 profile_form.save()
 
                 # Update the password if a new one is provided
-                new_password = password_form.cleaned_data.get('new_password1')
+                if password_form.is_valid():
+                    new_password = password_form.cleaned_data.get('new_password1')
                 if new_password:
                     request.user.set_password(new_password)
                     request.user.save()
