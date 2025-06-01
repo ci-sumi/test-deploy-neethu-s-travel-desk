@@ -6,7 +6,7 @@
     <h3 class="text-center">My Favorite Destinations</h3>
     
     <div class="row flex-grow-1" >
-        {% for destination in favorite_destination %}
+        {% for destination in favorite_destinations %}
         <div class="col-md-4 mb-4">
             <div class="card shadow-sm h-100">
                 {% if destination.image %}
@@ -34,17 +34,17 @@
         {% endfor %}
     </div>
 </div>
-{% if page_obj.has_other_pages %}
+{% if favorite_destinations.has_other_pages %}
 <div class="d-flex justify-content-between mt-4">
     <div>
-        {% if page_obj.has_previous %}
+        {% if favorite_destinations.has_previous %}
             <a class="btn btn-outline-secondary" href="?page={{ page_obj.previous_page_number }}">Previous</a>
         {% else %}
             <span class="btn btn-outline-secondary disabled">Previous</span>
         {% endif %}
     </div>
     <div>
-        {% if page_obj.has_next %}
+        {% if favorite_destinations.has_next %}
             <a class="btn btn-outline-secondary" href="?page={{ page_obj.next_page_number }}">Next</a>
         {% else %}
             <span class="btn btn-outline-secondary disabled">Next</span>
