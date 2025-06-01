@@ -27,10 +27,10 @@ class BudgetCalculatorForm(forms.ModelForm):
                 attrs={'class': 'form-control', 'placeholder': '$0.00','min': 0}
             ),
             'activity_cost': forms.NumberInput(
-                attrs={'class': 'form-control', 'placeholder': '$0.00','min': 1}
+                attrs={'class': 'form-control', 'placeholder': '$0.00','min': 0}
             ),
             'number_of_adults': forms.NumberInput(
-                attrs={'class': 'form-control','min': 0}
+                attrs={'class': 'form-control','min': 1}
             ),
             'number_of_infants': forms.NumberInput(
                 attrs={'class': 'form-control','min': 0}
