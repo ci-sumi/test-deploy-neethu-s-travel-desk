@@ -9,7 +9,7 @@ from accounts.models import Destination
 
 
 # Handles the search functionality and pagination for the list of destinations
-# @login_required
+@login_required
 def destination_list(request):
     form = DestinationSearchForm(request.GET or None)
     query = request.GET.get('query', '')
@@ -32,7 +32,7 @@ def destination_list(request):
 
 
 # Handles the creation of a new destination by the logged-in user
-# @login_required
+@login_required
 def destination_create(request):
     if request.method == 'POST':
         form = DestinationForm(request.POST, request.FILES)
@@ -58,7 +58,7 @@ def destination_create(request):
 
 
 # Displays the details of a single destination
-# @login_required
+@login_required
 def destination_detail(request, id):
     destination = get_object_or_404(Destination, id=id)
     return render(request, 'destination_detail.html', {
@@ -67,7 +67,7 @@ def destination_detail(request, id):
 
 
 # Displays the list of destinations created by the logged-in user
-# @login_required
+@login_required
 def mydestination(request):
     destinations = Destination.objects.filter(user=request.user)
     return render(request, 'mydestination.html', {
@@ -77,7 +77,7 @@ def mydestination(request):
 
 
 # Allows the user to update the details of an existing destination
-# @login_required
+@login_required
 def destination_update(request, destination_id):
     destination = get_object_or_404(Destination, id=destination_id)
     if request.method == 'POST':
@@ -98,7 +98,7 @@ def destination_update(request, destination_id):
 
 
 # Deletes a destination after user confirmation
-# @login_required
+@login_required
 def destination_delete(request, destination_id):
     destination = get_object_or_404(Destination, id=destination_id)
     if request.method == 'POST':
@@ -111,7 +111,7 @@ def destination_delete(request, destination_id):
 
 
 # Adds or removes a destination from the logged-in user's favorites
-# @login_required
+@login_required
 def favorite_destination(request, destination_id):
     destination = get_object_or_404(Destination, id=destination_id)
     if request.user in destination.favorites.all():
@@ -125,7 +125,7 @@ def favorite_destination(request, destination_id):
 
 
 # Displays the list of favorite destinations for the logged-in user
-# @login_required
+@login_required
 def my_favorites(request):
     favorite_destinations = Destination.objects.filter(favorites=request.user)
     paginator = Paginator(favorite_destinations, 6)  # Show 6 destinations
@@ -138,7 +138,7 @@ def my_favorites(request):
 
 
 # Allows the user to like or unlike a destination
-# @login_required
+@login_required
 def likes_destination(request, destination_id):
     destination = get_object_or_404(Destination, id=destination_id)
     if request.user in destination.likes.all():
