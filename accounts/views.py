@@ -111,7 +111,7 @@ def profile_view(request):
 
 
 # View for updating profile
-@login_required
+# @login_required
 def update_profile(request):
     try:
         # Ensure the UserProfile exists
@@ -175,7 +175,7 @@ def update_profile(request):
 
 
 # View for deleting profile
-@login_required
+# @login_required
 def delete_profile(request):
     if request.method == 'POST':
         request.user.delete()
