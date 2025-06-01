@@ -13,7 +13,7 @@ class BudgetCalculator(models.Model):
     transportation_cost = models.DecimalField(max_digits=10, decimal_places=2, validators=[MinValueValidator(0)])
     food_cost = models.DecimalField(max_digits=10, decimal_places=2, validators=[MinValueValidator(0)])
     activity_cost = models.DecimalField(max_digits=10, decimal_places=2, validators=[MinValueValidator(0)])
-    number_of_adults = models.IntegerField(default=1, validators=[MinValueValidator(0)])
+    number_of_adults = models.IntegerField(default=1, validators=[MinValueValidator(1)])
     number_of_infants = models.IntegerField(default=0, validators=[MinValueValidator(0)])
 
     def total_cost(self):
