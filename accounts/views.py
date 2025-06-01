@@ -89,7 +89,7 @@ def contact(request):
 
 
 # View for rendering profile page
-@login_required
+# @login_required
 def profile_view(request):
     if not request.user.is_authenticated:
         return HttpResponseRedirect(reverse_lazy('login'))
