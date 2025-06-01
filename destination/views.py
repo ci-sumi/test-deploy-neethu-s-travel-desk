@@ -125,7 +125,7 @@ def favorite_destination(request, destination_id):
 
 
 # Displays the list of favorite destinations for the logged-in user
-# @login_required
+@login_required
 def my_favorites(request):
     favorite_destinations = Destination.objects.filter(favorites=request.user)
     paginator = Paginator(favorite_destinations, 6)  # Show 6 destinations
