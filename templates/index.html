@@ -54,10 +54,10 @@
                 <li class="nav-item">
                     <a class="nav-link profile-link" href="{% url 'profile_view' %}">
                         {% if user.user_profile.profile_picture %}
-                        <img src="{{ user.user_profile.profile_picture.url }}" class="img-thumbnail rounded-circle"
+                        <img src="{{ user.user_profile.profile_picture.url }}" alt="profileimg" class="img-thumbnail rounded-circle"
                             style="width: 50px; height: 50px; object-fit: cover;">
                         {% else %}
-                        <img src="{% static 'images/defaultprofile.webp' %}" class="img-thumbnail rounded-circle"
+                        <img src="{% static 'images/defaultprofile.webp' %}" alt="profileimg" class="img-thumbnail rounded-circle"
                             style="width: 50px; height: 50px; object-fit: cover;">
                         {% endif %}
                         {{ user.username }}
