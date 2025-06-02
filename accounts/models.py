@@ -2,13 +2,17 @@ from django.db import models
 from django import forms
 from django.contrib.auth.models import User
 from cloudinary.models import CloudinaryField
+from django.core.validators import RegexValidator
 
 
 # Contact model for storing user contact information
 class Contact(models.Model):
     name = models.CharField(max_length=200)
     email = models.EmailField(max_length=200)
-    phone_number = models.IntegerField()
+    phone_number = phone_number = models.CharField(
+    max_length=20,
+    validators=[RegexValidator(r'^\+?1?\d{9,15}$')]
+    )
     contact_message = models.TextField()
     time_stamp = models.DateField(auto_now_add=True, blank=True)
 
